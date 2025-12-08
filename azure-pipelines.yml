@@ -35,3 +35,17 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftp://site45346.siteasp.net'
+    username: 'site45346'
+    password: 'mW%9S-2af7R='
+    rootDirectory: '$(System.DefaultWorkingDirectory)'
+    filePatterns: '**'
+    remoteDirectory: '/'
+    clean: false
+    cleanContents: true
+    preservePaths: false
+    trustSSL: false
