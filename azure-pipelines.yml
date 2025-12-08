@@ -64,7 +64,7 @@ steps:
     password: 'mW%9S-2af7R='
     rootDirectory: '$(Build.ArtifactStagingDirectory)\WebApp'
     filePatterns: '**'
-    remoteDirectory: '/'
+    remoteDirectory: '/wwwroot'
     clean: false
     cleanContents: true
     preservePaths: false
