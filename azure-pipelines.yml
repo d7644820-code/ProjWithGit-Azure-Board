@@ -24,13 +24,13 @@ steps:
     solution: '$(solution)'
     msbuildArgs: >
       /p:DeployOnBuild=true
-      /p:WebPublishMethod=Package
-      /p:PackageAsSingleFile=true
+      /p:WebPublishMethod=FileSystem
+      /p:DeleteExistingFiles=true
+      /p:publishUrl="$(Build.ArtifactStagingDirectory)\WebApp"
       /p:SkipInvalidConfigurations=true
-      /p:DesktopBuildPackageLocation="$(Build.ArtifactStagingDirectory)\WebApp.zip"
-      /p:DeployIisAppPath="Default Web Site"
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
 
 # 4. Run tests
 - task: VSTest@2
