@@ -43,29 +43,3 @@ steps:
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'drop'
-
-# 6. Extract WebApp.zip before FTP upload
-- task: PowerShell@2
-  displayName: 'Extract WebApp.zip'
-  inputs:
-    targetType: 'inline'
-    script: |
-      $zipPath = "$(Build.ArtifactStagingDirectory)\WebApp.zip"
-      $extractPath = "$(Build.ArtifactStagingDirectory)\WebApp"
-      if (Test-Path $extractPath) { Remove-Item $extractPath -Recurse -Force }
-      Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
-
-# 7. Upload extracted files via FTP
-- task: FtpUpload@2
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftp://site45346.siteasp.net'
-    username: 'site45346'
-    password: 'mW%9S-2af7R='
-    rootDirectory: '$(Build.ArtifactStagingDirectory)\WebApp'
-    filePatterns: '**'
-    remoteDirectory: '/wwwroot'
-    clean: false
-    cleanContents: true
-    preservePaths: false
-    trustSSL: false
